@@ -1,0 +1,27 @@
+name: ollama-promptfoo
+
+services:
+  ollama:
+    image: ollama/ollama:${OLLAMA_DOCKER_TAG:-latest}
+    container_name: ollama-promptfoo
+    volumes:
+      - /usr/share/ollama/.ollama:/root/.ollama
+    tty: true
+
+  promptfoo:
+    image: ghcr.io/promptfoo/promptfoo:${PROMPTFOO_DOCKER_TAG:-latest}
+    container_name: promptfoo
+    volumes:
+      - ./data:/home/promptfoo/.promptfoo
+      - ./eval:/home/promptfoo/eval
+    environment:
+      - 'TZ=Asia/Tokyo'
+      - 'OLLAMA_BASE_URL=http://ollama-promptfoo:11434'
+      - 'PROMPTFOO_DISABLE_TELEMETRY=1'
+    ports:
+      - '127.0.0.1:${PROMPTFOO_PORT:-3000}:3000'
+
+volumes:
+  ollama: {}
+
+#   promptfoo_data:
