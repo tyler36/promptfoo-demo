@@ -1,0 +1,6 @@
+rules:
+  # Disable ["unpinned-uses"](https://woodruffw.github.io/zizmor/audits/#unpinned-uses")
+  unpinned-uses:
+    config:
+      policies:
+        "*": ref-pin
