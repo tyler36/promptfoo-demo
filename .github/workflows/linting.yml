@@ -1,0 +1,28 @@
+name: linting
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dclint:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: "☁️ checkout repository"
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: "🧹 Lint docker-compose"
+        uses: docker-compose-linter/dclint-github-action/docker-action@v1.3.0
+        with:
+          args: '[".", "-r", "--debug", "-f", "github"]'
