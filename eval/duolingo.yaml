@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+
+# @See https://www.promptfoo.dev/docs/configuration/test-cases/#loading-media-files
+
+description: RAG test
+
+prompts:
+  - 'Given the information from {{CONTEXT}}, respond to the following query: "{{QUERY}}"'
+  - 'file://prompts/rag-template.md'
+
+providers:
+  # - id: ollama:llama3.2:1b
+  - id: ollama:llama3.2:latest
+
+defaultTest:
+  vars:
+    CONTEXT: 'file://media/The_Duolingo_Handbook.pdf'
+
+tests:
+  - vars:
+      QUERY: 'Summarize the document in a maximum of 50 words.'
+
+  - vars:
+      QUERY: 'What year was the document released?'
+    assert:
+      - type: icontains
+        value: '2025'
+
+  - vars:
+      QUERY: 'Who authored the document?'
+
+  - vars:
+      QUERY: "What is the company's mission?"
+
+  - vars:
+      QUERY: 'What is the first principle in the Duolingo Handbook?'
+    assert:
+      - type: icontains
+        value: 'Take the long view'
+
+  - vars:
+      QUERY: 'Using bullet points, list the six steps of the Green Machine'
+    assert:
+      - type: icontains
+        value: 'Staff It with Great People'
+
+  - vars:
+      QUERY: 'What does SLT stand for?'
+    assert:
+      - type: icontains
+        value: 'Senior Leadership Team'
