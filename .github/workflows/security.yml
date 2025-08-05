@@ -1,0 +1,30 @@
+name: security
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  zizmor:
+    name: zizmor
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read # only needed for private repos
+      actions: read # only needed for private repos
+    steps:
+      - name: "☁️ checkout repository"
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          persist-credentials: false
+      - name: Run zizmor 🌈
+        uses: zizmorcore/zizmor-action@v0.1.1
+        with:
+          advanced-security: false
