@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+
+# Learn more about building a configuration: https://promptfoo.dev/docs/configuration/guide
+
+description: "Translation evaluation"
+
+prompts:
+  - 'Convert this English to "{{language}}": "{{input}}"'
+  - 'Translate to "{{language}}": "{{input}}"'
+  - 'You are an expert translator. Translate "{{input}}" to "{{language}}".'
+
+providers:
+  - "ollama:llama3.2:latest"
+
+tests:
+  - vars:
+      language: Japanese
+      input: 'Hello world'
+  - vars:
+      language:  Japanese
+      input: 'Where is the library?'
+  - vars:
+      language:  Japanese
+      input: 'I have 2 younger brothers.'
+  - vars:
+      language: Japanese
+      input: 'Achieve all your goals in one place'
+  - vars:
+      language: English
+      input: 'お申し込み特典を 1 つ選んで Google 広告を開始する'
