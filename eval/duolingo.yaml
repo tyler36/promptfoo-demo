@@ -43,6 +43,16 @@ tests:
     assert:
       - type: icontains
         value: 'Staff It with Great People'
+      - type: icontains
+        value: 'Define Success'
+      - type: icontains
+        value: 'Set Guardrails and Think Long-Term'
+      - type: icontains
+        value: 'Build the Thing and Set Up Feedback Loops'
+      - type: icontains
+        value: 'Execute with Urgency and Excellence'
+      - type: icontains
+        value: "Double Down on What Works, Stop What Doesn't"
 
   - vars:
       QUERY: 'What does SLT stand for?'
