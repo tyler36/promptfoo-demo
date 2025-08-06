@@ -10,7 +10,8 @@ prompts:
 
 providers:
   # - id: ollama:llama3.2:1b
-  - id: ollama:llama3.2:latest
+  # - id: ollama:llama3.2:latest
+  - id: ollama:gwen3:1b
 
 defaultTest:
   vars:
@@ -51,8 +52,8 @@ tests:
         value: 'Build the Thing and Set Up Feedback Loops'
       - type: icontains
         value: 'Execute with Urgency and Excellence'
-      - type: icontains
-        value: "Double Down on What Works, Stop What Doesn't"
+      - type: regex
+        value: "Double Down on What Works, Stop What Doesn('|’)t"
 
   - vars:
       QUERY: 'What does SLT stand for?'
