@@ -7,13 +7,19 @@ providers:
 prompts:
   - 'Solve this step by step: {{problem}}'
 
+defaultTest:
+  options:
+    provider:
+      # Text provider for llm-rubric, answer-relevance, factuality, etc.
+      text:
+        id: ollama:llama3.2:latest
+
 tests:
   - vars:
       problem: "A company has 100 employees. 60% work remotely, 25% work hybrid, and the rest work in office. If remote workers get a $200 stipend and hybrid workers get $100, what's the total monthly stipend cost?"
     assert:
       - type: llm-rubric
         value: 'Shows clear mathematical reasoning and arrives at correct answer ($14,500)'
-        provider: ollama:llama3.2:latest
       - type: contains
         value: '$14,500'
 
@@ -22,6 +28,5 @@ tests:
     assert:
       - type: llm-rubric
         value: 'Correctly calculates the remaining apples (9 apples total)'
-        provider: ollama:llama3.2:latest
       - type: contains
         value: '9'
